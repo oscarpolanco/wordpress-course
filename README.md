@@ -36,3 +36,8 @@ On this section we will install all the things we need to work on our example pr
 ```
 - If you  want an image for your theme you just need to add an image on your theme directory with the name `screenshot.png` ideally you want the image to be `200px` wide by `900px` tall
 - Your theme should be available on the `theme` section of your admin
+
+### Functions
+Wordpress have a set of functions that help us to build our site.
+
+- `bloginfo` => Is a Wordpress function that returns us general theme information depending the parameter that you send. This information can be update going to the admin on the setting section; click on general.

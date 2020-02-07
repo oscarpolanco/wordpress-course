@@ -6,7 +6,7 @@ This code is power by:
 
 ## Section 1: Getting started
 
-On this section we will install all the things we need to work on our example project.
+In this section, we will install all the things we need to work on our example project.
 
 ### Install Local by Flywheel
 - Download and Install [Local by Flywheel](https://localbyflywheel.com/)
@@ -38,6 +38,34 @@ On this section we will install all the things we need to work on our example pr
 - Your theme should be available on the `theme` section of your admin
 
 ### Functions
-Wordpress have a set of functions that help us to build our site.
+Wordpress has a set of functions that help us to build our site.
 
-- `bloginfo` => Is a Wordpress function that returns us general theme information depending the parameter that you send. This information can be update going to the admin on the setting section; click on general.
+- `bloginfo` => Is a Wordpress function that returns us general theme information depending on the parameter that you send. This information can update going to the admin on the setting section; click on general.
+
+## Section 3: Wordpress Specific PHP
+In this section, we will handle the `Wordpress loop` to handle post and pages.
+
+### Wordpress loop
+On `Wordpress` we loop over `post` using some build functions that will know witch information they need to render.
+
+Here is an example:
+```php
+<?php
+
+    while(have_posts()) {
+        the_post(); 
+?>
+        <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+        <?php the_content(); ?>
+        <hr>
+<?php }
+```
+On the example `have_post` will have the number of post that you will render so you will render the correct number of post that you need. `the_post` will have the current post but to add more detail information using pre-build functions to get more information such as:
+
+`the_title` => Returns the title of a post
+`the_permalink` => Returns the url of a post
+`the_content` => Returns the content of the editor of a post
+
+### Wordpress template hierarchy
+
+Here a [url](https://developer.wordpress.org/themes/basics/template-hierarchy/) of the official `Wordpress` documentation

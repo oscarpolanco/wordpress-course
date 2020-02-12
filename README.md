@@ -69,3 +69,26 @@ On the example `have_post` will have the number of post that you will render so 
 ### Wordpress template hierarchy
 
 Here a [url](https://developer.wordpress.org/themes/basics/template-hierarchy/) of the official `Wordpress` documentation
+
+### Header and footer
+
+With `Wordpress` you can have a `header` and `footer` that you can reuse on all your templates you just need to create 2 files called `header.php` and `footer.php` on the root of your theme then you just need to add `get_header()` and `wp_footer()` on your templates. Adding `wp_footer()` on your template will add the `Wordpress` header menu that is shown when you are logged on the admin.
+
+### Add style on your theme
+
+You can add your `style` using your `function.php` (the file that you can add the functions that will interact with the `Wordpress core`). First, need to create a function that will add your `style` file like this example:
+```php
+function my_function_name() {
+        wp_enqueue_style('my_style_name', get_stylesheet_uri());
+}
+```
+
+Inside of the function, you will call the `wp_enqueue_style` that will receive a name and a path of a file. In this example, we are using the `get_stylesheet_uri` function that gives us the path of the stylesheet that is on the root.
+
+Them to add the style we add use the `add_action` function that recive the name of a `hook` (specific moment) and the name of a function that will run on a specific moment. Following the previews example we will have this:
+
+```php
+add_action('wp_enqueue_scripts', 'my_function_name');
+```
+
+This hook will run when `Wordpress` add the code on the header.

@@ -92,3 +92,23 @@ add_action('wp_enqueue_scripts', 'my_function_name');
 ```
 
 This hook will run when `Wordpress` add the code on the header.
+
+### Add scripts on your theme
+You can add your custom `scripts` on your theme using `wp_enqueue_script` function that will receive a couple of parameters:
+
+- Name of the file
+- The current path of the file
+- Name of the script dependency
+- The version of the file
+- Boolean that allow you to load your script on the footer or header (`true` for the footer)
+
+```php
+function university_files()
+{
+    wp_enqueue_script('main-university-js', get_theme_file_uri('/js/scripts-bundled.js'), NULL, '1.0', true);
+}
+
+add_action('wp_enqueue_scripts', 'university_files');
+```
+
+The `get_theme_file_uri` is a function that retrieves a path of a file receiving a string that represents the path of our custom file.

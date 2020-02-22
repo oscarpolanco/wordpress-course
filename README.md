@@ -42,7 +42,8 @@ Wordpress has a set of functions that help us to build our site.
 
 - `bloginfo` => Is a Wordpress function that returns us general theme information depending on the parameter that you send. This information can update going to the admin on the setting section; click on general.
 
-## Section 3: Wordpress Specific PHP
+### Section 3: Wordpress Specific PHP
+
 In this section, we will handle the `Wordpress loop` to handle post and pages.
 
 ### Wordpress loop
@@ -125,4 +126,19 @@ function university_files()
 
 add_action('wp_enqueue_scripts', 'university_files');
 
+```
+## Section 4: Pages
+
+On this section we will handle different `pages` using Wordpress.
+
+### Add page title with Wordpress
+To add the `title` tag information of your page you can use `Wordpress` functions that will know witch `title` they should put on every page. We use the `add_theme_support` function that receives the option that you need. In this case we use the `title-tag` option that represent the `title` of the page.
+
+```php
+function university_feature()
+{
+    add_theme_support('title-tag');
+}
+
+add_action('after_setup_theme', 'university_feature');
 ```

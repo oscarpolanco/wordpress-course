@@ -112,3 +112,17 @@ add_action('wp_enqueue_scripts', 'university_files');
 ```
 
 The `get_theme_file_uri` is a function that retrieves a path of a file receiving a string that represents the path of our custom file.
+
+### Avoid cache locally
+You can use the `microtime` function on your custom scripts and stylesheet to avoid the cache of the browser just need to put the function on the place of the version of the file like the following example (DO NOT USE IT ON PRODUCTION)
+
+```php
+function university_files()
+{
+    wp_enqueue_script('main-university-js', get_theme_file_uri('/js/scripts-bundled.js'), NULL, microtime(), true);
+    wp_enqueue_style('university_main_styles', get_stylesheet_uri(), NULL, microtime());
+}
+
+add_action('wp_enqueue_scripts', 'university_files');
+
+```

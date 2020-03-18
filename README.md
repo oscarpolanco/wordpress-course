@@ -142,3 +142,36 @@ function university_feature()
 
 add_action('after_setup_theme', 'university_feature');
 ```
+
+### Custom menus
+You can add your custom menus 2 ways on a Wordpress theme:
+
+- Using a hardcode menu on your template
+- Using Wordpress functions that will create the menu and will fill the information of that menu with the options that you provide from the admin
+
+To use WP function to make our custom menu we need 2 functions `wp_nav_menu` and `register_nav_menu`. The first function will construct the menu with the information that you supply from the admin and the second one will `register` your menu so the admin can recognize that you will use a custom menu. Here an example:
+
+`header.php`
+```php
+<nav class="main-navigation">
+    <ul>
+        <?php
+        wp_nav_menu(array(
+            'theme_location' => 'headerMenuLocation'
+        ));
+        ?>
+    </ul>
+</nav>
+```
+
+`function.php`
+```php
+function university_feature()
+{
+    register_nav_menu('headerMenuLocation', 'Header Menu Location');
+}
+
+add_action('after_setup_theme', 'university_feature');
+```
+
+The `wp_nav_menu` will receive an associate `array` with the options that you need; in this case, we just use the `theme_location` option that will be associate with the name of your menu. The `register_nav_menu` function receives the name of the menu and the title that the menu will have on the admin. With those 2 functions, you will have a menu link with your admin and just need to go to the menu section and customize your menu.

@@ -42,7 +42,8 @@ Wordpress has a set of functions that help us to build our site.
 
 - `bloginfo` => Is a Wordpress function that returns us general theme information depending on the parameter that you send. This information can update going to the admin on the setting section; click on general.
 
-## Section 3: Wordpress Specific PHP
+### Section 3: Wordpress Specific PHP
+
 In this section, we will handle the `Wordpress loop` to handle post and pages.
 
 ### Wordpress loop
@@ -126,3 +127,51 @@ function university_files()
 add_action('wp_enqueue_scripts', 'university_files');
 
 ```
+## Section 4: Pages
+
+On this section we will handle different `pages` using Wordpress.
+
+### Add page title with Wordpress
+To add the `title` tag information of your page you can use `Wordpress` functions that will know witch `title` they should put on every page. We use the `add_theme_support` function that receives the option that you need. In this case we use the `title-tag` option that represent the `title` of the page.
+
+```php
+function university_feature()
+{
+    add_theme_support('title-tag');
+}
+
+add_action('after_setup_theme', 'university_feature');
+```
+
+### Custom menus
+You can add your custom menus 2 ways on a Wordpress theme:
+
+- Using a hardcode menu on your template
+- Using Wordpress functions that will create the menu and will fill the information of that menu with the options that you provide from the admin
+
+To use WP function to make our custom menu we need 2 functions `wp_nav_menu` and `register_nav_menu`. The first function will construct the menu with the information that you supply from the admin and the second one will `register` your menu so the admin can recognize that you will use a custom menu. Here an example:
+
+`header.php`
+```php
+<nav class="main-navigation">
+    <ul>
+        <?php
+        wp_nav_menu(array(
+            'theme_location' => 'headerMenuLocation'
+        ));
+        ?>
+    </ul>
+</nav>
+```
+
+`function.php`
+```php
+function university_feature()
+{
+    register_nav_menu('headerMenuLocation', 'Header Menu Location');
+}
+
+add_action('after_setup_theme', 'university_feature');
+```
+
+The `wp_nav_menu` will receive an associate `array` with the options that you need; in this case, we just use the `theme_location` option that will be associate with the name of your menu. The `register_nav_menu` function receives the name of the menu and the title that the menu will have on the admin. With those 2 functions, you will have a menu link with your admin and just need to go to the menu section and customize your menu.
